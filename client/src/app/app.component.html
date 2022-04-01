@@ -1,0 +1,43 @@
+<nav>
+  <ul class="menu">
+    <li class="menu-item">Users</li>
+  </ul>
+</nav>
+<div class="container">
+  <div class="container-item">
+    <h2>Create new user</h2>
+    <form #createUserForm="ngForm" (ngSubmit)="createUser()">
+      <p>
+        <label>Name: </label>
+        <input type="text" [(ngModel)]="user.name" name="userName">
+      </p>
+      <p>
+        <label>Email: </label>
+        <input type="text" [(ngModel)]="user.email" name="userEmail">
+      </p>
+      <p>
+        <label>Avatar: </label>
+        <input type="file" (change)="onAvatarUpload($event)" name="userAvatar">
+      </p>
+      <p>
+        <button type="submit">Create</button>
+      </p>
+    </form>
+  </div>
+  <div class="container-item">
+    <h2>Registered users</h2>
+    <ng-container *ngFor="let user of users;">
+      <div class="user-container">
+        <div class="user-container-item user-avatar">
+          <img [src]=sanitizeUrl(user.avatar) alt="ava">
+        </div>
+        <div class="user-container-item user-info">
+          <p>ID: {{user.id}}</p>
+          <p>Name: {{user.name}}</p>
+          <p>Email: {{user.email}}</p>
+        </div>
+      </div>
+      <hr>
+    </ng-container>
+  </div>
+</div>
